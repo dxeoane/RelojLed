@@ -1,0 +1,8 @@
+#ifndef _CONFIGURATION_H_
+#define _CONFIGURATION_H_
+
+// WiFi
+static const char ssid[] = "Your SSID"; 
+static const  char pass[] = "Your Password"; 
+
+#endif
