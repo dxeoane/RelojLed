@@ -1,12 +1,9 @@
 #include <ESP8266WiFi.h>
-#include <TM1638plus.h>
 #include <TimeLib.h>
 #include "Configuration.h"
+#include "display.h"
 #include "utils.h"
 #include "clock.h"
-
-// STB, CLK, DIO
-TM1638plus TM1638(13, 12 , 14);
 
 void setup() {
   Serial.begin(115200);
@@ -14,9 +11,7 @@ void setup() {
   delay(1000);
   Serial.println("\n\n\n");  
 
-  // Inicializamos el display
-  TM1638.displayBegin();
-  TM1638.displayText("Conn ...");
+  displaySetup();
 
   // Nos conectamos al WiFi
   Serial.print("Connecting to ");
@@ -39,6 +34,21 @@ void setup() {
 }
 
 void loop() {
-  String timenow = twoDigits(hour()) + "-" + twoDigits(minute()) + "-" + twoDigits(second());
-  TM1638.displayText(timenow.c_str());
+  String timenow = twoDigits(day()) + "." + twoDigits(month()) + "." + twoDigits(hour()) + "." + twoDigits(minute());
+  displayText(timenow);
+
+  int buttons = buttonsRead();
+  if (buttons) {
+    String value = "";
+    for (int i=0; i< 8; i++) {
+      if (buttons % 2 == 0) {
+        value = value + "0";
+      } else {
+        value = value + "1";
+      }  
+      buttons = buttons / 2;      
+    }
+    displayText(value);
+    delay(1000);
+  }
 }
