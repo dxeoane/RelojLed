@@ -52,10 +52,10 @@ void loop() {
   }
 
   switch (buttonsRead()) {
-    case 0x01:
+    case 0x01: // Primer boton
       mode = CLOCK;
       break;
-    case 0x81:
+    case 0x81: // Primer y útimo botón, pulsados a la vez
       mode = TEST;
       break;  
   }
