@@ -3,6 +3,7 @@
 #include <TimeLib.h>
 #include "Arduino.h"
 #include "utils.h"
+#include "display.h"
 #include "clock.h"
 
 
@@ -72,4 +73,9 @@ void clockSetup() {
   Udp.begin(localPort);
   setSyncProvider(getNtpTime);
   setSyncInterval(300);
+}
+
+void clockLoop() {
+  String timenow = twoDigits(day()) + "." + twoDigits(month()) + "." + twoDigits(hour()) + "." + twoDigits(minute());
+  displayText(timenow);
 }

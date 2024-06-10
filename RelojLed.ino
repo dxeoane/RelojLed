@@ -34,21 +34,30 @@ void setup() {
 }
 
 void loop() {
-  String timenow = twoDigits(day()) + "." + twoDigits(month()) + "." + twoDigits(hour()) + "." + twoDigits(minute());
-  displayText(timenow);
+  
+  enum Mode {
+    TEST,
+    CLOCK
+  };
+  
+  static Mode mode = CLOCK;
 
-  int buttons = buttonsRead();
-  if (buttons) {
-    String value = "";
-    for (int i=0; i< 8; i++) {
-      if (buttons % 2 == 0) {
-        value = value + "0";
-      } else {
-        value = value + "1";
-      }  
-      buttons = buttons / 2;      
-    }
-    displayText(value);
-    delay(1000);
+  switch (mode) {
+    case TEST: 
+      displayText("HELLO   ");
+      break;
+    case CLOCK:
+      clockLoop();
+      break;
   }
+
+  switch (buttonsRead()) {
+    case 0x01:
+      mode = CLOCK;
+      break;
+    case 0x81:
+      mode = TEST;
+      break;  
+  }
+  
 }
