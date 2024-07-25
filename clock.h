@@ -3,6 +3,8 @@
 
 void clockSetup();
 void clockLoop();
+void chronometerReset();
+void chronometerLoop();
 
 time_t getNtpTime();
 void sendNTPpacket(IPAddress &address);

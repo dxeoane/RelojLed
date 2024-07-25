@@ -8,7 +8,7 @@ TM1638plus TM1638(13, 12 , 14);
 void displaySetup() {
   // Inicializamos el display
   TM1638.displayBegin();
-  TM1638.displayText("Conn ...");
+  TM1638.displayText("HELLO ...");
 }
 
 void displayText(String text) {

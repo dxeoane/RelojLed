@@ -76,6 +76,25 @@ void clockSetup() {
 }
 
 void clockLoop() {
-  String timenow = twoDigits(day()) + "." + twoDigits(month()) + "." + twoDigits(hour()) + "." + twoDigits(minute());
+  String timenow = lpad(day(),2) + "." + lpad(month(),2) + "." + lpad(hour(),2) + "." + lpad(minute(),2);
+  displayText(timenow);
+}
+
+unsigned long chronometerStart = 0;
+
+void chronometerReset() {
+  chronometerStart = millis();
+}
+
+void chronometerLoop() {
+  unsigned long currentMillis = millis() - chronometerStart;
+  unsigned long h = currentMillis / (3600 * 1000);
+  currentMillis = currentMillis % (3600 * 1000);
+  unsigned long m = currentMillis / (60 * 1000);
+  currentMillis = currentMillis % (60 * 1000);
+  unsigned long s = currentMillis / 1000;
+  currentMillis = currentMillis % 1000;
+  unsigned long c = currentMillis / 100;
+  String timenow = lpad(h,3) + "." + lpad(m,2) + "." + lpad(s,2) + "." + String(c);
   displayText(timenow);
 }

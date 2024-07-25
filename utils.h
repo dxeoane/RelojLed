@@ -3,6 +3,6 @@
 
 #include "Arduino.h"
 
-String twoDigits(int digits);
+String lpad(int number, int n);
 
 #endif

@@ -1,12 +1,14 @@
+#include <math.h>
 #include "Arduino.h"
 #include "utils.h"
 
-String twoDigits(int digits) {
-  if (digits < 10) {
-    String i = '0' + String(digits);
-    return i;
+String lpad(int number, int n) {
+  String s = String(abs(number));
+  if (number >= 0) {
+    while (s.length() < n) s = "0" + s; 
+  } else {
+    while (s.length() < n - 1) s = "0" + s; 
+    s = '-' + s;
   }
-  else {
-    return String(digits);
-  }
+  return s;
 }
